@@ -51,7 +51,7 @@ with open(input_path) as datafile:
         if position1 == b-1:
             d=item1[0]
            
- print("Total months: {}".format(count))
+    print("Total months: {}".format(count))
 print(f"Total : $ {sum(our_l)}")
 print(f"Average  Change : ${round((sum(v_l) / len(v_l)),2)}")
 print(f"Greatest Increase in Profits: ${c}  {max(v_l)}")
