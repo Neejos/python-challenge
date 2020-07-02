@@ -1,14 +1,16 @@
 import os
 import csv
+import math
 
 input_path= os.path.join("Resources", "election_data.csv")
 
-
-count=0
 i=0
+name_l=[]
 
-our_l=[]
+voter_id_l=[]
 candidates_l = []
+key_l=[]
+val_l=[]
 
 with open(input_path) as datafile:
     csvreader = csv.reader(datafile, delimiter = ",")
@@ -17,31 +19,46 @@ with open(input_path) as datafile:
  # loop through the rows nad count the no of row to give total no of vote
 #Also place the value of the "candidates" column in a list(our_l)
     for row in csvreader:
-        count=count+1
-        our_l.append(row[2])
         
-print("Election Results")
-print("-------------------------")
-print(F"Total Votes : {count}")
-print("-------------------------")
-
-# loop through the names column list(our_l) and if the two adjacent value are not the same and if that first value is not in the candidates_l
-#which is empty to start with,then the first compared value is appended to the candidates_l.
-for i in range(count-1):
-    if our_l[i+1]!=our_l[i] and our_l[i] not in candidates_l:
-            candidates_l.append(our_l[i])
+        candidates_l.append(row[2])
+        voter_id_l.append(row[0])
+    dict={}
+    for i in set(candidates_l):   #convert list to set to get the unique values
+        dict.update({i:0})        #  each value in the set is converted to a dictionary so that the no of votes for each
+                                  # candidate can be set to 0
             
-#  each value in candidates_l is compared to every value in the our_l and variable 'c' holds the no of times
-#they are the same,which in turn shows the total votes per candidate
-# variable b holds the candidate name
-# variable a hold the percentage of votes per candidate
-for j in range(len( candidates_l)):
-    c = 0
-    for i in range(count-1):
-        if candidates_l[j] == our_l[i]:
-           c = c+1
-    b= candidates_l[j]
-    a = (c/count)*100
-    print("{} : {}% ({})".format(b,round(a,2),c))
+    for i in candidates_l:       #  parse through row in the candidate list 
+        dict[i] = dict[i] +1     # and  every time a value in the dict is found the corresponding vote value in th dict in increased by one
+    print(dict)                 # unique candidate list and the corresponding total votes for each
+    
+   
+   key_l = list(dict.keys()) 
+val_l = list(dict.values()) 
+ 
+
+outfile=os.path.join("Analysis","ElectionResults.txt")
+
+with open(outfile,"w") as data:
+    data.writelines("       Election Analysis\n")
+    data.writelines("--------------------------------------\n")
+    data.writelines("Total Votes : {len(voter_id_l)}\n")
+    data.writelines("--------------------------------------\n")
+    print(f"Election Results")
+    print(f"-------------------------")
+    print(F"Total Votes : {(len(voter_id_l))}")
+    print(f"-------------------------")
+    for i in range(len(key_l)):
+        a =key_l[i]
+        b= round((float(val_l[i]/len(voter_id_l)))*100,2)
+        c = val_l[i]
+
+        print(f"{a} : {b}%   ({c})")
+        data.writelines(f"{a} : {b}%   ({c})\n")
+    for i in range(len(key_l)):
+        if val_l[i] == max(val_l):
         
+            print(f"-------------------------")            
+            print(f"Winner : {key_l[i]}")
+            data.writelines("-------------------------\n")
+            data.writelines("Winner : {key_l[i]}")
           
