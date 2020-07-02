@@ -41,7 +41,7 @@ outfile=os.path.join("Analysis","ElectionResults.txt")
 with open(outfile,"w") as data:
     data.writelines("       Election Analysis\n")
     data.writelines("--------------------------------------\n")
-    data.writelines("Total Votes : {len(voter_id_l)}\n")
+    data.writelines(f"Total Votes : {len(voter_id_l)}\n")
     data.writelines("--------------------------------------\n")
     print(f"Election Results")
     print(f"-------------------------")
@@ -60,5 +60,5 @@ with open(outfile,"w") as data:
             print(f"-------------------------")            
             print(f"Winner : {key_l[i]}")
             data.writelines("-------------------------\n")
-            data.writelines("Winner : {key_l[i]}")
+            data.writelines(f"Winner : {key_l[i]}")
           
