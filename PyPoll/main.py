@@ -54,6 +54,7 @@ with open(outfile,"w") as data:
 
         print(f"{a} : {b}%   ({c})")
         data.writelines(f"{a} : {b}%   ({c})\n")
+        
     for i in range(len(key_l)):
         if val_l[i] == max(val_l):
         
