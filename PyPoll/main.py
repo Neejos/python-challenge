@@ -32,7 +32,7 @@ with open(input_path) as datafile:
     print(dict)                 # unique candidate list and the corresponding total votes for each
     
    
-   key_l = list(dict.keys()) 
+key_l = list(dict.keys()) 
 val_l = list(dict.values()) 
  
 

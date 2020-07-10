@@ -38,7 +38,8 @@ for i in range(len(v_l)-1):
 final_str=f'''      Financial Analysis
 --------------------------------------
 Total months: {len(date_l)}                
-Total : $ {sum(our_l)}                     
+Total : $ {sum(our_l)}
+Average Change : $ {round(sum(v_l)/len(v_l),2)}
 Greatest Increase in Profits: {a}   $({max(v_l)})
 Greatest Decrease in Profits: {b}   $({min(v_l)})'''
 
